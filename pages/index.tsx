@@ -46,14 +46,14 @@ const StarStyle = css`
 
 const StyledStar01 = styled(Box)`
   ${StarStyle}
-  animation: 0.5s ease 3.2s 1 running both ${star1InAnimation},
-             7.5s linear 3.7s infinite alternate running forwards ${starMoveAnimation};
+  animation: 0.5s ease 2.7s 1 running both ${star1InAnimation},
+             7.5s linear 3.2s infinite alternate running forwards ${starMoveAnimation};
 `;
 
 const StyledStar02 = styled(Box)`
   ${StarStyle}
-  animation: 0.5s ease 3s 1 running both ${star2InAnimation},
-             7s linear 3.7s infinite alternate-reverse running forwards ${starMoveAnimation};
+  animation: 0.5s ease 2.5s 1 running both ${star2InAnimation},
+             7s linear 3.2s infinite alternate-reverse running forwards ${starMoveAnimation};
 `;
 
 const Star01: React.VFC = () => (
@@ -88,18 +88,18 @@ const CloudStyle = css`
 
 const StyledCloud01 = styled(Box)`
   ${CloudStyle}
-  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 2s 1 running both ${cloudInAnimation},
-             7.5s linear 3.7s infinite alternate running forwards ${cloudMoveAnimation};
+  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 1.5s 1 running both ${cloudInAnimation},
+             7.5s linear 3.2s infinite normal running forwards ${cloudMoveAnimation};
 `;
 
 const StyledCloud02 = styled(Box)`
   ${CloudStyle}
-  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 2.5s 1 normal running both ${cloudInAnimation},
-             7s linear 4s infinite alternate-reverse running forwards ${cloudMoveAnimation};
+  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 2s 1 normal running both ${cloudInAnimation},
+             7s linear 3.5s infinite reverse running forwards ${cloudMoveAnimation};
 `;
 
 const Cloud01: React.VFC = () => (
-  <StyledCloud01 left="-37%" right="auto" bottom="0">
+  <StyledCloud01 left="-35%" right="auto" bottom="0">
     <Image
       src="/assets/img/top/cloud01.png"
       alt="cloud"
@@ -143,20 +143,6 @@ const Page: React.VFC = () => {
                 objectFit="contain"
                 width="100%"
                 maxHeight="calc(100vh - 60px)"
-              />
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              position="absolute"
-              width="100%"
-            >
-              <Image
-                src="/assets/img/top/star02.png"
-                alt="star"
-                width="25%"
-                objectFit="contain"
               />
             </Box>
             <Star02 />
