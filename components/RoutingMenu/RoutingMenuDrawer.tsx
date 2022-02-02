@@ -6,8 +6,8 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerProps,
 } from "@chakra-ui/react";
+import type { DrawerProps } from "@chakra-ui/react";
 
 export interface RoutingMenuDrawerProps extends DrawerProps {
   children: React.ReactNode;
