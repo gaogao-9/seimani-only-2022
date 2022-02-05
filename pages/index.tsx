@@ -36,6 +36,11 @@ const starMoveAnimation = keyframes`
   to   { transform: rotate(0deg); }
 `;
 
+const starRotateAnimation = keyframes`
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+`;
+
 const StarStyle = css`
   display: flex;
   justify-content: center;
@@ -48,12 +53,22 @@ const StyledStar01 = styled(Box)`
   ${StarStyle}
   animation: 0.5s ease 2.7s 1 running both ${star1InAnimation},
              7.5s linear 3.2s infinite alternate running forwards ${starMoveAnimation};
+
+  & img:hover {
+    animation: 0.3s ease-in 0s reverse 2 running both ${starRotateAnimation};
+    transform-origin: 50.3268% 51.4019%;
+  }
 `;
 
 const StyledStar02 = styled(Box)`
   ${StarStyle}
   animation: 0.5s ease 2.5s 1 running both ${star2InAnimation},
              7s linear 3.2s infinite alternate-reverse running forwards ${starMoveAnimation};
+
+  & img:hover {
+    animation: 0.3s ease 0s 2 normal running both ${starRotateAnimation};
+    transform-origin: 50.3268% 51.4019%;
+  }
 `;
 
 const Star01: React.VFC = () => (
