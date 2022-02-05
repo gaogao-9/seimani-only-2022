@@ -55,7 +55,7 @@ const StyledStar01 = styled(Box)`
              7.5s linear 3.2s infinite alternate running forwards ${starMoveAnimation};
 
   & img:hover {
-    animation: 0.3s ease-in 0s reverse 2 running both ${starRotateAnimation};
+    animation: 0.5s ease-in 0s reverse 1 running both ${starRotateAnimation};
     transform-origin: 50.3268% 51.4019%;
   }
 `;
@@ -66,7 +66,7 @@ const StyledStar02 = styled(Box)`
              7s linear 3.2s infinite alternate-reverse running forwards ${starMoveAnimation};
 
   & img:hover {
-    animation: 0.3s ease 0s 2 normal running both ${starRotateAnimation};
+    animation: 0.5s ease 0s 1 normal running both ${starRotateAnimation};
     transform-origin: 50.3268% 51.4019%;
   }
 `;
