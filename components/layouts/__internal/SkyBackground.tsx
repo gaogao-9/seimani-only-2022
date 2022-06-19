@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 const SkyBackgroundWrapper = styled.div`
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   background-attachment: fixed;
   background-color: var(--chakra-colors-skin-aqua);
 `;
@@ -26,7 +26,7 @@ const YellowCircle = styled.div`
   right: auto;
   bottom: 0;
   width: 150vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   border-radius: 50%;
   background: var(--chakra-colors-skin-orange);
   pointer-events: none;

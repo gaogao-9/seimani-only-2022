@@ -7,7 +7,7 @@ const routesText = encodeURIComponent(
 );
 
 const routingMenuFont = css`
-  @import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho%20B1:wght@400;600&display=swap&text=${routesText}");
+  @import url("https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop:wght@400&display=swap&text=${routesText}");
 `;
 
 const topAnimationText = encodeURIComponent("おかえりただいま");
@@ -17,7 +17,7 @@ const topAnimationFont = css`
 `;
 
 const BodyTextFont = css`
-  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;500&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;500&display=swap");
 `;
 
 export const GlobalStyle: React.VFC = () => {

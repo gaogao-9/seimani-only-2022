@@ -34,13 +34,13 @@ export const Card: Card = ({ title, children, ...props }) => {
         marginBottom={8}
         borderBottomStyle="solid"
         borderBottomWidth="1px"
-        borderBottomColor="gray.700"
+        borderBottomColor="gray.800"
       >
         <Text
           fontSize="4xl"
           fontFamily={`"Noto Sans JP", sans-serif`}
           fontWeight="300"
-          color="gray.700"
+          color="orange.700"
         >
           {title}
         </Text>
@@ -49,8 +49,8 @@ export const Card: Card = ({ title, children, ...props }) => {
         as="div"
         fontSize="lg"
         fontFamily={`"Noto Sans JP", sans-serif`}
-        fontWeight="100"
-        color="gray.700"
+        fontWeight="200"
+        color="blue.800"
       >
         {children}
       </Text>
@@ -66,7 +66,7 @@ const CardSection: React.VFC<CardProps> = ({ title, children, ...props }) => {
           fontSize="2xl"
           fontFamily={`"Noto Sans JP", sans-serif`}
           fontWeight="300"
-          color="gray.700"
+          color="pink.600"
         >
           {title}
         </Text>
@@ -76,8 +76,9 @@ const CardSection: React.VFC<CardProps> = ({ title, children, ...props }) => {
           as="div"
           fontSize="lg"
           fontFamily={`"Noto Sans JP", sans-serif`}
-          fontWeight="100"
-          color="gray.700"
+          fontWeight="200"
+          color="blue.800"
+          lineHeight={1.75}
         >
           {children}
         </Text>

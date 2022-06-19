@@ -23,7 +23,7 @@ export const RoutingMenuDrawer: React.VFC<RoutingMenuDrawerProps> = ({
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader />
-        <DrawerBody>{children}</DrawerBody>
+        <DrawerBody p={0}>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
   );

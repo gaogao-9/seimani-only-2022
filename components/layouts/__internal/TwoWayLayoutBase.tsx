@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   grid-template: "contents menu  " 1fr / 1fr auto;
   width: 100%;
   height: 100vh;
+  isolation: isolate;
 `;
 
 interface GridItemProps {
@@ -21,14 +22,6 @@ const GridItem = styled.div<GridItemProps>`
   grid-area: ${({ gridArea }) => gridArea};
   ${({ overflow }) => overflow && `overflow: ${overflow};`};
   overflow-x: hidden;
-`;
-
-const ContentsWrapper = styled.div`
-  display: grid;
-  grid-template:
-    "contents" 1fr
-    "footer" auto / 1fr;
-  height: 100%;
 `;
 
 export interface TwoWayLayoutBaseProps {
@@ -44,25 +37,16 @@ export const TwoWayLayoutBase: React.VFC<TwoWayLayoutBaseProps> = ({
   return (
     <>
       <Wrapper {...props}>
-        <GridItem gridArea="contents" overflow="hidden">
-          <ContentsWrapper>
-            <GridItem gridArea="contents" overflow="auto">
-              {children}
-            </GridItem>
-            <GridItem
-              gridArea="footer"
-              style={{ zIndex: 1, boxShadow: "0px -5px 20px 12px white" }}
-            >
-              <Footer />
-            </GridItem>
-          </ContentsWrapper>
+        <GridItem gridArea="contents" overflow-y="auto">
+          {children}
+          <Footer />
         </GridItem>
-        <GridItem gridArea="menu" overflow="hidden">
+        <GridItem gridArea="menu" overflow-y="auto">
           <Box
             display={{ base: "none", lg: "block" }}
-            w="272px"
+            w="200px"
             h="100%"
-            py={10}
+            pt={6}
             overflowY="auto"
           >
             <RoutingMenu />
