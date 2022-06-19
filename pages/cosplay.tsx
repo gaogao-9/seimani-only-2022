@@ -153,7 +153,7 @@ const Page: React.VFC = () => {
             <br />
             <br />
             <StyledLink
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdk2Uw2tW1rdMuKSn9No6DFGbqRpr0uLATVNoSh-VKdllCymQ/viewform"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdzT0EmNzv7IIfbeOnjueZWRfsd94DSWTlHSvaU0O2rEPTi3w/viewform"
               target="_blank"
               rel="noreferrer"
               aria-disabled={!isChecked || (undefined as unknown as boolean)}
