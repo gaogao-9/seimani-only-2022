@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--chakra-colors-black-full);
+  background-color: var(--chakra-colors-white-full);
 `;
 
 const Contents = styled.div`
