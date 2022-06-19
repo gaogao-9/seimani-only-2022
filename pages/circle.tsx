@@ -142,7 +142,7 @@ const Page: React.VFC = () => {
             ☆&quot;戦挙権&quot;を持っていた（「政剣マニフェスティア」のプレイヤーであった）こと
           </Card.Section>
           <Card.Section title="サークル参加費用">
-            1スペース&nbps;3500円
+            1スペース&nbsp;3500円
             <br />
             [含まれるもの]
             <br />
