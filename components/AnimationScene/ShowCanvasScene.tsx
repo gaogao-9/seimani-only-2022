@@ -282,10 +282,10 @@ const Yasmin = styled.div<{ src: string; smallSrc: string }>`
   background-attachment: fixed;
   animation: 3s cubic-bezier(0, 1, 0, 1) 2.6s 1 running both ${zoomedCharaMoveL};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -304,10 +304,10 @@ const MaskedYasminA = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.1s cubic-bezier(0, 1, 0, 1) 2.5s 1 running both
     ${zoomedMaskedCharaMoveLA};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -326,10 +326,10 @@ const MaskedYasminB = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.2s cubic-bezier(0, 1, 0, 1) 2.4s 1 running both
     ${zoomedMaskedCharaMoveLB};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -348,10 +348,10 @@ const MaskedYasminC = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.3s cubic-bezier(0, 1, 0, 1) 2.3s 1 running both
     ${zoomedMaskedCharaMoveLC};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -369,10 +369,10 @@ const Momoka = styled.div<{ src: string; smallSrc: string }>`
   background-attachment: fixed;
   animation: 3s cubic-bezier(0, 1, 0, 1) 4.4s 1 running both ${zoomedCharaMoveR};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -391,10 +391,10 @@ const MaskedMomokaA = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.1s cubic-bezier(0, 1, 0, 1) 4.3s 1 running both
     ${zoomedMaskedCharaMoveRA};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -413,10 +413,10 @@ const MaskedMomokaB = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.2s cubic-bezier(0, 1, 0, 1) 4.2s 1 running both
     ${zoomedMaskedCharaMoveRB};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
@@ -435,10 +435,10 @@ const MaskedMomokaC = styled.div<{ src: string; smallSrc: string }>`
   animation: 3.3s cubic-bezier(0, 1, 0, 1) 4.1s 1 running both
     ${zoomedMaskedCharaMoveRC};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 800px) {
     mask-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
