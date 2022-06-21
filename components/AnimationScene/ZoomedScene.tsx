@@ -148,10 +148,10 @@ const Chara = styled.div<{ src: string; smallSrc: string }>`
     1s steps(1, start) 2.5s 1 running forwards ${moveCharaAnimation4},
     1.5s ease 3.5s 1 running forwards ${moveCharaAnimation5};
 
-  @media (min-aspect-ratio: 1/1) and (max-height: 320px) {
+  @media (min-aspect-ratio: 1/1) and (max-height: 360px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
-  @media (max-aspect-ratio: 1/1) and (max-width: 320px) {
+  @media (max-aspect-ratio: 1/1) and (max-width: 360px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
   }
 `;
