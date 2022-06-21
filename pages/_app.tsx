@@ -13,7 +13,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <ChakraProvider theme={theme}>
-        <Transition>
+        <Transition path={router.pathname}>
           <>
             <CSSReset key={`${router.pathname}-css-reset`} />
             <GlobalStyle key={`${router.pathname}-global-style`} />

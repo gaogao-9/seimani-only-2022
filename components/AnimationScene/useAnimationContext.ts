@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
 const imageNames = [
-  "syerobu_d.png",
-  "hirari_d.png",
-  "syerobu_c.png",
-  "hirari_c.png",
+  "yasmin.png",
+  "yasmin_m.png",
+  "momoka.png",
+  "momoka_m.png",
+  "chara.png",
 ] as const;
 
 type ImageNames = typeof imageNames extends ReadonlyArray<infer T> ? T : never;

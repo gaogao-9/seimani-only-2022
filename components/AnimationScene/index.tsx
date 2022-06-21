@@ -1,30 +1,40 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { SceneName } from "./scene";
 import { InitScene } from "./InitScene";
 import { LoadingScene } from "./LoadingScene";
-import { RotateScene } from "./RotateScene";
-import { CallingScene } from "./CallingScene";
+import { ShowCanvasScene } from "./ShowCanvasScene";
+import { ZoomedScene } from "./ZoomedScene";
 import { EndScene } from "./EndScene";
 import {
   AnimationContext,
   useAnimationContextValue,
 } from "./useAnimationContext";
 
-export const Scene: React.VFC = () => {
+export type SceneProps = {
+  onSceneEnd: () => void;
+};
+
+export const Scene: React.VFC<SceneProps> = ({ onSceneEnd }) => {
   const animationContextValue = useAnimationContextValue();
   const [scene, setScene] = useState<SceneName>("init");
   const changeNextScene = useCallback(() => {
     switch (scene) {
       case "init":
-        setScene("end");
+        setScene("loading");
         return;
       case "loading":
-        setScene("rotate");
+        setScene("showCanvas");
         return;
-      case "rotate":
-        setScene("calling");
+      case "showCanvas":
+        setScene("zoomed");
         return;
-      case "calling":
+      case "zoomed":
         setScene("end");
         return;
       case "end":
@@ -42,10 +52,10 @@ export const Scene: React.VFC = () => {
         return <InitScene changeNextScene={changeNextScene} />;
       case "loading":
         return <LoadingScene changeNextScene={changeNextScene} />;
-      case "rotate":
-        return <RotateScene changeNextScene={changeNextScene} />;
-      case "calling":
-        return <CallingScene changeNextScene={changeNextScene} />;
+      case "showCanvas":
+        return <ShowCanvasScene changeNextScene={changeNextScene} />;
+      case "zoomed":
+        return <ZoomedScene changeNextScene={changeNextScene} />;
       case "end":
         return <EndScene changeNextScene={changeNextScene} />;
       default: {
@@ -62,6 +72,14 @@ export const Scene: React.VFC = () => {
       animationContextValue.dispose();
     };
   }, []);
+
+  const onSceneEndRef = useRef(onSceneEnd);
+  onSceneEndRef.current = onSceneEnd;
+  useEffect(() => {
+    if (scene === "end") {
+      onSceneEndRef.current();
+    }
+  }, [scene]);
 
   return (
     <>

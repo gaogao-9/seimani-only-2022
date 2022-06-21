@@ -1,8 +1,13 @@
 import { PageTransition } from "next-page-transitions";
 
-export const Transition: React.FC = ({ children }) => (
+export type TransitionProps = {
+  path: string;
+  children: React.ReactNode;
+};
+
+export const Transition: React.VFC<TransitionProps> = ({ path, children }) => (
   <>
-    <PageTransition timeout={300} classNames="page-transition">
+    <PageTransition timeout={300} classNames="page-transition" key={path}>
       {children}
     </PageTransition>
     <style jsx global>{`

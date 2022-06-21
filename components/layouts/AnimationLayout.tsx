@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
@@ -8,24 +8,52 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--chakra-colors-white-full);
+  background-color: var(--chakra-colors-black-full);
+
+  &[data-animation-end="true"] {
+    background-color: var(--chakra-colors-white-full);
+    transition: background-color 1.5s linear;
+  }
 `;
 
 const Contents = styled.div`
   width: min(100vw, 100vh);
   height: min(100vw, 100vh);
   overflow: hidden;
+  pointer-events: none;
+  perspective: 200vmin;
 `;
 
 export interface AnimationLayoutProps {
+  isAnimationEnded: boolean;
+  onLayoutAnimationEnd: () => void;
   children: React.ReactNode;
 }
 
 export const AnimationLayout: React.VFC<AnimationLayoutProps> = ({
+  isAnimationEnded,
   children,
+  onLayoutAnimationEnd,
   ...props
-}) => (
-  <Wrapper {...props}>
-    <Contents>{children}</Contents>
-  </Wrapper>
-);
+}) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const onTransitionEnd: React.TransitionEventHandler<HTMLDivElement> =
+    useCallback(
+      (eve) => {
+        if (eve.target !== wrapperRef.current) return;
+
+        onLayoutAnimationEnd();
+      },
+      [onLayoutAnimationEnd],
+    );
+  return (
+    <Wrapper
+      {...props}
+      ref={wrapperRef}
+      data-animation-end={isAnimationEnded ? true : undefined}
+      onTransitionEnd={onTransitionEnd}
+    >
+      <Contents>{children}</Contents>
+    </Wrapper>
+  );
+};
