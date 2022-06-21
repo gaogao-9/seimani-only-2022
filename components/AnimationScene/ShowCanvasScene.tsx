@@ -269,7 +269,7 @@ const FadeInCenterRect = styled(Rect)`
     ${clipCircleAnimationAtCenter};
 `;
 
-const Yasmin = styled.div<{ src: string }>`
+const Yasmin = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -281,9 +281,16 @@ const Yasmin = styled.div<{ src: string }>`
   background-repeat: no-repeat;
   background-attachment: fixed;
   animation: 3s cubic-bezier(0, 1, 0, 1) 2.6s 1 running both ${zoomedCharaMoveL};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedYasminA = styled.div<{ src: string }>`
+const MaskedYasminA = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -296,9 +303,16 @@ const MaskedYasminA = styled.div<{ src: string }>`
   background-color: var(--chakra-colors-orange-300);
   animation: 3.1s cubic-bezier(0, 1, 0, 1) 2.5s 1 running both
     ${zoomedMaskedCharaMoveLA};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedYasminB = styled.div<{ src: string }>`
+const MaskedYasminB = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -311,9 +325,16 @@ const MaskedYasminB = styled.div<{ src: string }>`
   background-color: var(--chakra-colors-orange-200);
   animation: 3.2s cubic-bezier(0, 1, 0, 1) 2.4s 1 running both
     ${zoomedMaskedCharaMoveLB};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedYasminC = styled.div<{ src: string }>`
+const MaskedYasminC = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -326,9 +347,16 @@ const MaskedYasminC = styled.div<{ src: string }>`
   background-color: var(--chakra-colors-orange-100);
   animation: 3.3s cubic-bezier(0, 1, 0, 1) 2.3s 1 running both
     ${zoomedMaskedCharaMoveLC};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const Momoka = styled.div<{ src: string }>`
+const Momoka = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -339,11 +367,17 @@ const Momoka = styled.div<{ src: string }>`
   background-position: 40% 30%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  animation: 3s cubic-bezier(0, 1, 0, 1) 4.35s 1 running both
-    ${zoomedCharaMoveR};
+  animation: 3s cubic-bezier(0, 1, 0, 1) 4.4s 1 running both ${zoomedCharaMoveR};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedMomokaA = styled.div<{ src: string }>`
+const MaskedMomokaA = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -354,11 +388,18 @@ const MaskedMomokaA = styled.div<{ src: string }>`
   mask-position: 37% 30%;
   mask-repeat: no-repeat;
   background-color: var(--chakra-colors-blue-300);
-  animation: 3.1s cubic-bezier(0, 1, 0, 1) 4.25s 1 running both
+  animation: 3.1s cubic-bezier(0, 1, 0, 1) 4.3s 1 running both
     ${zoomedMaskedCharaMoveRA};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedMomokaB = styled.div<{ src: string }>`
+const MaskedMomokaB = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -369,11 +410,18 @@ const MaskedMomokaB = styled.div<{ src: string }>`
   mask-position: 34% 30%;
   mask-repeat: no-repeat;
   background-color: var(--chakra-colors-blue-200);
-  animation: 3.2s cubic-bezier(0, 1, 0, 1) 4.15s 1 running both
+  animation: 3.2s cubic-bezier(0, 1, 0, 1) 4.2s 1 running both
     ${zoomedMaskedCharaMoveRB};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
-const MaskedMomokaC = styled.div<{ src: string }>`
+const MaskedMomokaC = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -384,8 +432,15 @@ const MaskedMomokaC = styled.div<{ src: string }>`
   mask-position: 31% 30%;
   mask-repeat: no-repeat;
   background-color: var(--chakra-colors-blue-100);
-  animation: 3.3s cubic-bezier(0, 1, 0, 1) 4.05s 1 running both
+  animation: 3.3s cubic-bezier(0, 1, 0, 1) 4.1s 1 running both
     ${zoomedMaskedCharaMoveRC};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    mask-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
 const Wrapper = styled.div`
@@ -420,20 +475,44 @@ export const ShowCanvasScene: React.VFC<ShowCanvasScene> = ({
         <FadeInRightBottomRect color="orange" delay="2.25s" />
         <FadeInRightBottomRect color="green" delay="2.5s" />
         <FadeInRightBottomRect color="yellow" delay="2.75s">
-          <MaskedYasminC src={animationContext.images["yasmin_m.png"]} />
-          <MaskedYasminB src={animationContext.images["yasmin_m.png"]} />
-          <MaskedYasminA src={animationContext.images["yasmin_m.png"]} />
-          <Yasmin src={animationContext.images["yasmin.png"]} />
+          <MaskedYasminC
+            src={animationContext.images["yasmin_m.png"]}
+            smallSrc={animationContext.images["yasmin_m_s.png"]}
+          />
+          <MaskedYasminB
+            src={animationContext.images["yasmin_m.png"]}
+            smallSrc={animationContext.images["yasmin_m_s.png"]}
+          />
+          <MaskedYasminA
+            src={animationContext.images["yasmin_m.png"]}
+            smallSrc={animationContext.images["yasmin_m_s.png"]}
+          />
+          <Yasmin
+            src={animationContext.images["yasmin.png"]}
+            smallSrc={animationContext.images["yasmin_s.png"]}
+          />
         </FadeInRightBottomRect>
-        <FadeInLeftBottomRect color="pink" delay="4.5s">
-          <MaskedMomokaC src={animationContext.images["momoka_m.png"]} />
-          <MaskedMomokaB src={animationContext.images["momoka_m.png"]} />
-          <MaskedMomokaA src={animationContext.images["momoka_m.png"]} />
-          <Momoka src={animationContext.images["momoka.png"]} />
+        <FadeInLeftBottomRect color="pink" delay="4.7s">
+          <MaskedMomokaC
+            src={animationContext.images["momoka_m.png"]}
+            smallSrc={animationContext.images["momoka_m_s.png"]}
+          />
+          <MaskedMomokaB
+            src={animationContext.images["momoka_m.png"]}
+            smallSrc={animationContext.images["momoka_m_s.png"]}
+          />
+          <MaskedMomokaA
+            src={animationContext.images["momoka_m.png"]}
+            smallSrc={animationContext.images["momoka_m_s.png"]}
+          />
+          <Momoka
+            src={animationContext.images["momoka.png"]}
+            smallSrc={animationContext.images["momoka_s.png"]}
+          />
         </FadeInLeftBottomRect>
         <FadeInCenterRect
           color="teal"
-          delay="6.25s"
+          delay="6.7s"
           onAnimationEnd={animationEnd}
         ></FadeInCenterRect>
       </ActorWrapper>

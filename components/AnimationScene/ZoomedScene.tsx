@@ -131,7 +131,7 @@ const VerticalRect = styled(Rect)`
   animation: 0.3s linear 0.8s 1 running both ${verticalRectStretchAnimation};
 `;
 
-const CharaA = styled.div<{ src: string }>`
+const CharaA = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -147,6 +147,13 @@ const CharaA = styled.div<{ src: string }>`
     0.3s ease-in 2.2s 1 running forwards ${moveCharaAnimationA3},
     1s steps(1, start) 2.5s 1 running forwards ${moveCharaAnimationA4},
     1.5s ease 3.5s 1 running forwards ${moveCharaAnimationA5};
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 1000px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
 `;
 
 const WhiteoutRect = styled(Rect)`
@@ -240,7 +247,10 @@ export const ZoomedScene: React.VFC<ZoomedSceneProps> = ({
             style={{ left: "92.5%", transformOrigin: "top center" }}
           />
         </BackgroundAWrapper>
-        <CharaA src={animationContext.images["chara.png"]} />
+        <CharaA
+          src={animationContext.images["chara.png"]}
+          smallSrc={animationContext.images["chara_s.png"]}
+        />
         <WhiteoutRect />
       </ActorWrapper>
     </Wrapper>
