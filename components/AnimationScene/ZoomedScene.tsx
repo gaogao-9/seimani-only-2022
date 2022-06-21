@@ -22,7 +22,7 @@ const verticalRectStretchAnimation = keyframes`
   }
 `;
 
-const moveCharaAnimationA1 = keyframes`
+const moveCharaAnimation1 = keyframes`
   from {
     transform: translate(200%, 200%) rotate(45deg) scale(2.5);
   }
@@ -31,7 +31,7 @@ const moveCharaAnimationA1 = keyframes`
   }
 `;
 
-const moveCharaAnimationA2 = keyframes`
+const moveCharaAnimation2 = keyframes`
   from {
     transform: translate(5%, 5%) rotate(45deg) scale(2.5);
   }
@@ -40,7 +40,7 @@ const moveCharaAnimationA2 = keyframes`
   }
 `;
 
-const moveCharaAnimationA3 = keyframes`
+const moveCharaAnimation3 = keyframes`
   from {
     transform: translate(0%, 0%) rotate(45deg) scale(2.5);
   }
@@ -49,7 +49,7 @@ const moveCharaAnimationA3 = keyframes`
   }
 `;
 
-const moveCharaAnimationA4 = keyframes`
+const moveCharaAnimation4 = keyframes`
   0% {
     transform: translate(-200%, -200%) rotate(45deg) scale(2);
   }
@@ -67,7 +67,7 @@ const moveCharaAnimationA4 = keyframes`
   }
 `;
 
-const moveCharaAnimationA5 = keyframes`
+const moveCharaAnimation5 = keyframes`
   0% {
     transform: translate(0%, 0%) rotate(5deg) scale(2.5);
   }
@@ -131,7 +131,7 @@ const VerticalRect = styled(Rect)`
   animation: 0.3s linear 0.8s 1 running both ${verticalRectStretchAnimation};
 `;
 
-const CharaA = styled.div<{ src: string; smallSrc: string }>`
+const Chara = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -142,11 +142,11 @@ const CharaA = styled.div<{ src: string; smallSrc: string }>`
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  animation: 0.3s ease-out 0.9s 1 running both ${moveCharaAnimationA1},
-    1s linear 1.2s 1 running forwards ${moveCharaAnimationA2},
-    0.3s ease-in 2.2s 1 running forwards ${moveCharaAnimationA3},
-    1s steps(1, start) 2.5s 1 running forwards ${moveCharaAnimationA4},
-    1.5s ease 3.5s 1 running forwards ${moveCharaAnimationA5};
+  animation: 0.3s ease-out 0.9s 1 running both ${moveCharaAnimation1},
+    1s linear 1.2s 1 running forwards ${moveCharaAnimation2},
+    0.3s ease-in 2.2s 1 running forwards ${moveCharaAnimation3},
+    1s steps(1, start) 2.5s 1 running forwards ${moveCharaAnimation4},
+    1.5s ease 3.5s 1 running forwards ${moveCharaAnimation5};
 
   @media (min-aspect-ratio: 1/1) and (max-height: 1000px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});
@@ -247,7 +247,7 @@ export const ZoomedScene: React.VFC<ZoomedSceneProps> = ({
             style={{ left: "92.5%", transformOrigin: "top center" }}
           />
         </BackgroundAWrapper>
-        <CharaA
+        <Chara
           src={animationContext.images["chara.png"]}
           smallSrc={animationContext.images["chara_s.png"]}
         />
