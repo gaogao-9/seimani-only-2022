@@ -9,7 +9,7 @@ const Page: React.VFC = () => {
   const onSceneEnd = useCallback(() => {
     setIsAnimationEnded(true);
   }, []);
-  const onLayoutAnimationEnd = useCallback((e) => {
+  const onLayoutAnimationEnd = useCallback(() => {
     router.push("/top");
   }, []);
 
