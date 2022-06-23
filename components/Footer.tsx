@@ -3,7 +3,7 @@ import { Text } from "@chakra-ui/react";
 
 const Wrapper = styled.div`
   height: 60px;
-  background-color: var(--chakra-colors-skin-orange);
+  background-color: var(--chakra-colors-pink-700);
   overflow: hidden;
 `;
 
@@ -24,12 +24,12 @@ export const Footer: React.VFC = (props) => (
   <Wrapper {...props}>
     <Contents>
       <Line>
-        <Text fontSize="xs" color="blue.600">
+        <Text fontSize="xs" color="pink.50">
           政剣マニフェスティアオンリーイベント
         </Text>
       </Line>
       <Line>
-        <Text fontSize="xs" color="blue.600">
+        <Text fontSize="xs" color="pink.50">
           戦挙管理委員会
         </Text>
       </Line>

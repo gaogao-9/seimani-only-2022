@@ -1,172 +1,199 @@
-import React from "react";
-import { Box, Image } from "@chakra-ui/react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Box } from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { DefaultLayout as Layout } from "~/components/layouts/index";
+import {
+  TopImageContext,
+  useTopImageContext,
+  useTopImageContextValue,
+} from "~/hooks/useTopImageContext";
 
-const cloudInAnimation = keyframes`
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
-`;
+const imageSize = {
+  w: 3541,
+  h: 2508,
+} as const;
 
-const cloudMoveAnimation = keyframes`
-  from { transform: scale(1); }
-  25%  { transform: scale(0.9); }
-  50%  { transform: scale(1); }
-  75%  { transform: scale(1.1); }
-  to   { transform: scale(1); }
-`;
+const thresholdRatio = {
+  min: 600 / 1000,
+  max: 3000 / 1000,
+} as const;
 
-const star1InAnimation = keyframes`
-  from { transform: translateX(100vw) rotate(0deg); }
-  to   { transform: translateX(0) rotate(360deg); }
-`;
+const offsetRatio = {
+  landscape: 1,
+  portrait: 0.3,
+};
 
-const star2InAnimation = keyframes`
-  from { transform: translateX(-100vw) rotate(-360deg); }
-  to   { transform: translateX(0) rotate(0deg); }
-`;
-
-const starMoveAnimation = keyframes`
-  from { transform: rotate(0deg); }
-  25%  { transform: rotate(-10deg); }
-  50%  { transform: rotate(0deg); }
-  75%  { transform: rotate(10deg); }
-  to   { transform: rotate(0deg); }
-`;
-
-const starRotateAnimation = keyframes`
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-`;
-
-const StarStyle = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Image = styled(Box)<{ src: string }>`
   position: absolute;
+  top: 0;
+  left: 0;
+  width: ${imageSize.w}px;
+  height: ${imageSize.h}px;
+  background-image: url(${({ src }) => src});
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+`;
+
+const ImageWrapper = styled(Box)<
+  {
+    scaleX: number;
+    scaleY: number;
+  } & (
+    | {
+        translateX: number;
+      }
+    | { translateY: number }
+  )
+>`
   width: 100%;
+  height: 100%;
+  transform: translate(
+      ${({ translateX = 0 }) => translateX}px,
+      ${({ translateY = 0 }) => translateY}px
+    )
+    scale(${({ scaleX }) => scaleX}, ${({ scaleY }) => scaleY});
+  transform-origin: left top;
 `;
 
-const StyledStar01 = styled(Box)`
-  ${StarStyle}
-  animation: 0.5s ease 2.7s 1 running both ${star1InAnimation},
-             7.5s linear 3.2s infinite alternate running forwards ${starMoveAnimation};
+const PageLayout: React.VFC = () => {
+  const topImageContext = useTopImageContext();
 
-  & img:hover {
-    animation: 0.5s ease-in 0s reverse 1 running both ${starRotateAnimation};
-    transform-origin: 50.3268% 51.4019%;
-  }
-`;
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const [canvasSize, setCanvasSize] = useState<{ w: number; h: number }>({
+    w: 0,
+    h: 0,
+  });
 
-const StyledStar02 = styled(Box)`
-  ${StarStyle}
-  animation: 0.5s ease 2.5s 1 running both ${star2InAnimation},
-             7s linear 3.2s infinite alternate-reverse running forwards ${starMoveAnimation};
+  useEffect(() => {
+    if (imageContainerRef.current === null) return;
 
-  & img:hover {
-    animation: 0.5s ease 0s 1 normal running both ${starRotateAnimation};
-    transform-origin: 50.3268% 51.4019%;
-  }
-`;
+    const target = imageContainerRef.current;
 
-const Star01: React.VFC = () => (
-  <StyledStar01 bottom="0%" left="47%">
-    <Image
-      src="/assets/img/top/star01.png"
-      alt="star"
-      width="25%"
-      objectFit="contain"
-    />
-  </StyledStar01>
-);
+    const resizeObserver = new ResizeObserver((entry) => {
+      const [{ contentRect }] = entry;
+      setCanvasSize({ w: contentRect.width, h: contentRect.height });
+    });
 
-const Star02: React.VFC = () => (
-  <StyledStar02 top="12%" left="-47%">
-    <Image
-      src="/assets/img/top/star02.png"
-      alt="star"
-      width="25%"
-      objectFit="contain"
-    />
-  </StyledStar02>
-);
+    resizeObserver.observe(target);
 
-const CloudStyle = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-`;
+    return () => {
+      resizeObserver.unobserve(target);
+    };
+  }, [imageContainerRef.current]);
 
-const StyledCloud01 = styled(Box)`
-  ${CloudStyle}
-  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 1.5s 1 running both ${cloudInAnimation},
-             7.5s linear 3.2s infinite normal running forwards ${cloudMoveAnimation};
-`;
+  const scale = useMemo(() => {
+    const imageRatio = imageSize.w / imageSize.h;
+    const canvasRatio = canvasSize.w / canvasSize.h;
 
-const StyledCloud02 = styled(Box)`
-  ${CloudStyle}
-  animation: 0.5s cubic-bezier(0.02, 0.79, 0.3, 1.67) 2s 1 normal running both ${cloudInAnimation},
-             7s linear 3.5s infinite reverse running forwards ${cloudMoveAnimation};
-`;
+    if (canvasRatio > imageRatio) {
+      // 横長
+      return {
+        x:
+          (canvasSize.h * Math.min(canvasRatio, thresholdRatio.max)) /
+          imageRatio /
+          imageSize.h,
+        y:
+          (canvasSize.h * Math.min(canvasRatio, thresholdRatio.max)) /
+          imageSize.w,
+      };
+    } else {
+      // 縦長
+      return {
+        x:
+          canvasSize.w /
+          Math.max(canvasRatio, thresholdRatio.min) /
+          imageSize.h,
+        y:
+          ((canvasSize.w / Math.max(canvasRatio, thresholdRatio.min)) *
+            imageRatio) /
+          imageSize.w,
+      };
+    }
+  }, [canvasSize.w, canvasSize.h]);
 
-const Cloud01: React.VFC = () => (
-  <StyledCloud01 left="-35%" right="auto" bottom="0">
-    <Image
-      src="/assets/img/top/cloud01.png"
-      alt="cloud"
-      width="50%"
-      objectFit="contain"
-    />
-  </StyledCloud01>
-);
+  const translate = useMemo(() => {
+    const imageRatio = imageSize.w / imageSize.h;
+    const canvasRatio = canvasSize.w / canvasSize.h;
 
-const Cloud02: React.VFC = () => (
-  <StyledCloud02 top="0" left="50%">
-    <Image
-      src="/assets/img/top/cloud02.png"
-      alt="cloud"
-      width="50%"
-      objectFit="contain"
-    />
-  </StyledCloud02>
-);
+    if (canvasRatio > imageRatio) {
+      // 横長
+      return {
+        x:
+          (canvasSize.w / 2) *
+          (1 - Math.min(canvasRatio, thresholdRatio.max) / canvasRatio),
+        y:
+          canvasSize.h *
+          (1 - Math.min(canvasRatio, thresholdRatio.max) / imageRatio) *
+          offsetRatio.portrait,
+      };
+    } else {
+      // 縦長
+      return {
+        x:
+          (canvasSize.w / 2) *
+          (1 - imageRatio / Math.max(canvasRatio, thresholdRatio.min)) *
+          offsetRatio.landscape,
+        y:
+          canvasSize.h *
+          (1 - canvasRatio / Math.max(canvasRatio, thresholdRatio.min)),
+      };
+    }
+  }, [canvasSize.w, canvasSize.h]);
+
+  return (
+    <>
+      <Layout>
+        <Box
+          ref={imageContainerRef}
+          position="relative"
+          height="calc(100vh - 60px)"
+          width="100%"
+          overflow="hidden"
+        >
+          {topImageContext.loaded && (
+            <>
+              <ImageWrapper
+                scaleX={scale.x}
+                scaleY={scale.y}
+                translateX={translate.x}
+                translateY={translate.y}
+              >
+                <Image src={topImageContext.images["item.png"]} />
+                <Image src={topImageContext.images["chara.png"]} />
+                <Image src={topImageContext.images["bubble.png"]} />
+              </ImageWrapper>
+            </>
+          )}
+        </Box>
+      </Layout>
+    </>
+  );
+};
 
 const Page: React.VFC = () => {
+  const topImageContextValue = useTopImageContextValue();
+
+  useEffect(() => {
+    topImageContextValue.init();
+
+    return () => {
+      topImageContextValue.dispose();
+    };
+  }, []);
+
   return (
     <>
       <Head>
-        <link rel="preload" href="/assets/img/top/top.png" as="image" />
+        <link rel="preload" href="/assets/img/top/chara.png" as="image" />
+        <link rel="preload" href="/assets/img/top/item.png" as="image" />
+        <link rel="preload" href="/assets/img/top/bubble.png" as="image" />
       </Head>
-      <Layout>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="calc(100vh - 60px)"
-          maxWidth="100%"
-          overflow="hidden"
-        >
-          <Box position="relative" maxWidth="1200px">
-            <Box overflow="hidden">
-              <Image
-                src="/assets/img/top/top.png"
-                alt="main visual"
-                objectFit="contain"
-                width="100%"
-                maxHeight="calc(100vh - 60px)"
-              />
-            </Box>
-            <Star02 />
-            <Star01 />
-            <Cloud01 />
-            <Cloud02 />
-          </Box>
-        </Box>
-      </Layout>
+      <TopImageContext.Provider value={topImageContextValue}>
+        <PageLayout />
+      </TopImageContext.Provider>
     </>
   );
 };

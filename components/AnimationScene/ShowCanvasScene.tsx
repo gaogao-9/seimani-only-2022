@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { SceneProps } from "./scene";
-import { useAnimationContext } from "./useAnimationContext";
+import { useAnimationContext } from "~/hooks/useAnimationContext";
 
 const fadeInAnimation = keyframes`
   0% {

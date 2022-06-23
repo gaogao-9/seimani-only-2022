@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { SkyBackground } from "./__internal/SkyBackground";
+import { Background } from "./__internal/Background";
 import { Footer } from "~/components/Footer";
 
 const Wrapper = styled.div`
@@ -16,9 +16,9 @@ export const SingleLayout: React.VFC<SingleLayoutProps> = ({
   ...props
 }) => (
   <Wrapper {...props}>
-    <SkyBackground>
+    <Background>
       {children}
       <Footer />
-    </SkyBackground>
+    </Background>
   </Wrapper>
 );

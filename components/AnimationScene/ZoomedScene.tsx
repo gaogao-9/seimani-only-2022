@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { SceneProps } from "./scene";
-import { useAnimationContext } from "~/components/AnimationScene/useAnimationContext";
+import { useAnimationContext } from "~/hooks/useAnimationContext";
 
 const horizontalStretchAnimation = keyframes`
   from {

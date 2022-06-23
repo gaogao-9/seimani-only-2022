@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import { SceneProps } from "./scene";
-import { useAnimationContext } from "./useAnimationContext";
+import { useAnimationContext } from "~/hooks/useAnimationContext";
 
 const Wrapper = styled.div`
   display: flex;

@@ -14,7 +14,7 @@ import { EndScene } from "./EndScene";
 import {
   AnimationContext,
   useAnimationContextValue,
-} from "./useAnimationContext";
+} from "~/hooks/useAnimationContext";
 
 export type SceneProps = {
   onSceneEnd: () => void;

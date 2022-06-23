@@ -1,6 +1,6 @@
 import React from "react";
 import { TwoWayLayoutBase } from "./__internal/TwoWayLayoutBase";
-import { SkyBackground } from "./__internal/SkyBackground";
+import { Background } from "./__internal/Background";
 
 export interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -11,6 +11,6 @@ export const DefaultLayout: React.VFC<DefaultLayoutProps> = ({
   ...props
 }) => (
   <TwoWayLayoutBase {...props}>
-    <SkyBackground>{children}</SkyBackground>
+    <Background>{children}</Background>
   </TwoWayLayoutBase>
 );

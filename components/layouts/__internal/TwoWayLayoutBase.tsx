@@ -22,6 +22,7 @@ const GridItem = styled.div<GridItemProps>`
   grid-area: ${({ gridArea }) => gridArea};
   ${({ overflow }) => overflow && `overflow: ${overflow};`};
   overflow-x: hidden;
+  isolation: isolate;
 `;
 
 export interface TwoWayLayoutBaseProps {
@@ -37,11 +38,19 @@ export const TwoWayLayoutBase: React.VFC<TwoWayLayoutBaseProps> = ({
   return (
     <>
       <Wrapper {...props}>
-        <GridItem gridArea="contents" overflow-y="auto">
-          {children}
-          <Footer />
+        <GridItem gridArea="contents" overflow-y="visible">
+          <Box isolation="isolate">{children}</Box>
+          <Box isolation="isolate">
+            <Footer />
+          </Box>
         </GridItem>
-        <GridItem gridArea="menu" overflow-y="auto">
+        <GridItem
+          gridArea="menu"
+          overflow-y="auto"
+          style={{
+            backgroundColor: "var(--chakra-colors-white-full)",
+          }}
+        >
           <Box
             display={{ base: "none", lg: "block" }}
             w="200px"
