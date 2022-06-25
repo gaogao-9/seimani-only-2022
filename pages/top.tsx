@@ -27,7 +27,7 @@ const CharaInAnimation = keyframes`
 
 const BubbleInAnimation = keyframes`
   0% {
-    transform: scale(0, 0);
+    transform: scale(0.8, 0);
   }
   100% {
     transform: scale(1, 1);
