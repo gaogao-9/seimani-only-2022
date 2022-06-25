@@ -40,6 +40,7 @@ const computePositionYRate = (positionY: PositionY) => {
 
 type PositionX = "left" | "center" | "right" | number;
 type PositionY = "top" | "center" | "bottom" | number;
+type Size = { w: number; h: number };
 
 export type ResponsiveImageProps = {
   rectWidth: NonNullable<CSSProperties["width"]>;
@@ -53,6 +54,7 @@ export type ResponsiveImageProps = {
   portraitPositionX: PositionX;
   portraitPositionY: PositionY;
   children?: React.ReactNode;
+  onResize?: (canvasSize: Size) => void;
 };
 
 export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
@@ -67,13 +69,14 @@ export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
   portraitPositionX,
   portraitPositionY,
   children,
+  onResize,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [canvasSize, setCanvasSize] = useState<{ w: number; h: number }>({
+  const [canvasSize, setCanvasSize] = useState<Size>({
     w: 0,
     h: 0,
   });
-  const imageSize = useMemo(
+  const imageSize = useMemo<Size>(
     () => ({ w: imageWidth, h: imageHeight }),
     [imageWidth, imageHeight],
   );
@@ -86,10 +89,12 @@ export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
     const resizeObserver = new ResizeObserver((entry) => {
       const [{ contentRect }] = entry;
       setCanvasSize({ w: contentRect.width, h: contentRect.height });
+      onResize?.({ w: contentRect.width, h: contentRect.height });
     });
 
     const contentRect = target.getBoundingClientRect();
     setCanvasSize({ w: contentRect.width, h: contentRect.height });
+    onResize?.({ w: contentRect.width, h: contentRect.height });
 
     resizeObserver.observe(target);
 

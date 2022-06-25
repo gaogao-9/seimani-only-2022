@@ -1,4 +1,10 @@
-import React, { CSSProperties, useEffect } from "react";
+import React, {
+  CSSProperties,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import Head from "next/head";
@@ -84,6 +90,15 @@ const ItemMoveAnimation = keyframes`
   }
 `;
 
+const LogoInAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const ImageWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -105,10 +120,12 @@ const BubbleImageWrapper = styled(ImageWrapper)`
       ${BubbleMoveAnimation};
 `;
 
-const ItemImageWrapper = styled(ImageWrapper)<{
+type ItemImageWrapperProps = {
   delay: number;
   reverse: boolean;
-}>`
+};
+
+const ItemImageWrapper = styled(ImageWrapper)<ItemImageWrapperProps>`
   opacity: 0;
   animation: 0.5s cubic-bezier(0.35, 0.98, 0.59, 1.27)
       ${({ delay }) => delay + animationStartDelay + 1}s 1 running both
@@ -116,6 +133,23 @@ const ItemImageWrapper = styled(ImageWrapper)<{
     10s ease ${({ delay }) => delay + animationStartDelay + 1.5}s infinite
       ${({ reverse }) => (reverse ? "reverse" : "normal")} forwards running
       ${ItemMoveAnimation};
+`;
+
+type LogoWrapperProps = {
+  position: "bottom" | "right";
+  offsetX: number;
+  offsetY: number;
+};
+
+const LogoWrapper = styled(ImageWrapper)<LogoWrapperProps>`
+  animation: 0.5s ease ${animationStartDelay + 2.5}s 1 running both
+    ${LogoInAnimation};
+  transform: translate(
+    ${({ position, offsetX }) =>
+      imageSize.w * ((position === "bottom" ? 0 : 0.33) + offsetX)}px,
+    ${({ position, offsetY }) =>
+      imageSize.h * ((position === "bottom" ? 0.4 : 0.13) + offsetY)}px
+  );
 `;
 
 type ImageSetting = {
@@ -218,68 +252,123 @@ const itemSettings: readonly ImageSetting[] = [
 
 const PageLayout: React.VFC = () => {
   const topImageContext = useTopImageContext();
+  const [logoPosition, setLogoPosition] = useState<"bottom" | "right">(
+    "bottom",
+  );
+  const [[logoOffsetX, logoOffsetY], setLogoOffset] = useState<
+    [number, number]
+  >([0, 0]);
+
+  const onResize = useCallback((canvasSize) => {
+    const imageRatio = imageSize.w / imageSize.h;
+    const canvasRatio = canvasSize.w / canvasSize.h;
+    const positionThrethold = 2.16;
+    const rightOffsetThrethold = 3;
+
+    if (canvasRatio <= positionThrethold && canvasRatio >= imageRatio) {
+      const offsetRate =
+        (canvasRatio - imageRatio) / (positionThrethold - imageRatio);
+
+      setLogoOffset([0, offsetRate * -0.18]);
+    }
+
+    if (
+      canvasRatio <= rightOffsetThrethold &&
+      canvasRatio > positionThrethold
+    ) {
+      const offsetRate =
+        (rightOffsetThrethold - canvasRatio) /
+        (rightOffsetThrethold - positionThrethold);
+
+      setLogoOffset([offsetRate * -0.11, offsetRate * 0.09]);
+    }
+
+    setLogoPosition(canvasRatio > positionThrethold ? "right" : "bottom");
+  }, []);
 
   return (
     <>
       <Layout>
         {topImageContext.loaded && (
-          <ResponsiveImage
-            rectWidth="100%"
-            rectHeight="calc(100vh - 60px)"
-            landscapePositionX="center"
-            landscapePositionY={0.3}
-            portraitPositionX="center"
-            portraitPositionY="bottom"
-            imageWidth={imageSize.w}
-            imageHeight={imageSize.h}
-            minimumHeightThretholdRate={3000 / 1000}
-            minimumWidthThretholdRate={600 / 1000}
-          >
-            {itemSettings.map((setting, i) =>
-              setting.position === "background" ? (
-                <ItemImageWrapper key={i} delay={i / 15} reverse={i % 2 === 0}>
-                  <Image
-                    src={topImageContext.images["item.png"]}
-                    smallSrc={topImageContext.images["item_s.png"]}
-                    style={{
-                      width: imageSize.w,
-                      height: imageSize.h,
-                      clipPath: setting.clipPath,
-                    }}
-                  />
-                </ItemImageWrapper>
-              ) : null,
-            )}
-            <CharaImageWrapper>
-              <Image
-                src={topImageContext.images["chara.png"]}
-                smallSrc={topImageContext.images["chara_s.png"]}
-                style={{ width: imageSize.w, height: imageSize.h }}
-              />
-            </CharaImageWrapper>
-            {itemSettings.map((setting, i) =>
-              setting.position === "foreground" ? (
-                <ItemImageWrapper key={i} delay={i / 15} reverse={i % 2 === 0}>
-                  <Image
-                    src={topImageContext.images["item.png"]}
-                    smallSrc={topImageContext.images["item_s.png"]}
-                    style={{
-                      width: imageSize.w,
-                      height: imageSize.h,
-                      clipPath: setting.clipPath,
-                    }}
-                  />
-                </ItemImageWrapper>
-              ) : null,
-            )}
-            <BubbleImageWrapper>
-              <Image
-                src={topImageContext.images["bubble.png"]}
-                smallSrc={topImageContext.images["bubble_s.png"]}
-                style={{ width: imageSize.w, height: imageSize.h }}
-              />
-            </BubbleImageWrapper>
-          </ResponsiveImage>
+          <>
+            <ResponsiveImage
+              rectWidth="100%"
+              rectHeight="calc(100vh - 60px)"
+              landscapePositionX="center"
+              landscapePositionY={0.3}
+              portraitPositionX="center"
+              portraitPositionY="bottom"
+              imageWidth={imageSize.w}
+              imageHeight={imageSize.h}
+              minimumHeightThretholdRate={3000 / 1000}
+              minimumWidthThretholdRate={600 / 1000}
+              onResize={onResize}
+            >
+              {itemSettings.map((setting, i) =>
+                setting.position === "background" ? (
+                  <ItemImageWrapper
+                    key={i}
+                    delay={i / 15}
+                    reverse={i % 2 === 0}
+                  >
+                    <Image
+                      src={topImageContext.images["item.png"]}
+                      smallSrc={topImageContext.images["item_s.png"]}
+                      style={{
+                        width: imageSize.w,
+                        height: imageSize.h,
+                        clipPath: setting.clipPath,
+                      }}
+                    />
+                  </ItemImageWrapper>
+                ) : null,
+              )}
+              <CharaImageWrapper>
+                <Image
+                  src={topImageContext.images["chara.png"]}
+                  smallSrc={topImageContext.images["chara_s.png"]}
+                  style={{ width: imageSize.w, height: imageSize.h }}
+                />
+              </CharaImageWrapper>
+              {itemSettings.map((setting, i) =>
+                setting.position === "foreground" ? (
+                  <ItemImageWrapper
+                    key={i}
+                    delay={i / 15}
+                    reverse={i % 2 === 0}
+                  >
+                    <Image
+                      src={topImageContext.images["item.png"]}
+                      smallSrc={topImageContext.images["item_s.png"]}
+                      style={{
+                        width: imageSize.w,
+                        height: imageSize.h,
+                        clipPath: setting.clipPath,
+                      }}
+                    />
+                  </ItemImageWrapper>
+                ) : null,
+              )}
+              <BubbleImageWrapper>
+                <Image
+                  src={topImageContext.images["bubble.png"]}
+                  smallSrc={topImageContext.images["bubble_s.png"]}
+                  style={{ width: imageSize.w, height: imageSize.h }}
+                />
+              </BubbleImageWrapper>
+              <LogoWrapper
+                position={logoPosition}
+                offsetX={logoOffsetX}
+                offsetY={logoOffsetY}
+              >
+                <Image
+                  src={topImageContext.images["logo.png"]}
+                  smallSrc={topImageContext.images["logo_s.png"]}
+                  style={{ width: imageSize.w, height: imageSize.h }}
+                />
+              </LogoWrapper>
+            </ResponsiveImage>
+          </>
         )}
       </Layout>
     </>

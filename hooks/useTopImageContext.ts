@@ -8,6 +8,8 @@ const imageNames = [
   "item.png",
   "item.png",
   "item_s.png",
+  "logo.png",
+  "logo_s.png",
 ] as const;
 
 const { ImageContext, useImageContext, useImageContextValue } =
