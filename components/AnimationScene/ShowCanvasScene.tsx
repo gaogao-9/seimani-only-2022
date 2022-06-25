@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { SceneProps } from "./scene";

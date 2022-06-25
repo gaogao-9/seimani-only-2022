@@ -1,6 +1,14 @@
 import { createImageContext } from "~/hooks/useImageContext";
 
-const imageNames = ["chara.png", "bubble.png", "item.png"] as const;
+const imageNames = [
+  "chara.png",
+  "chara_s.png",
+  "bubble.png",
+  "bubble_s.png",
+  "item.png",
+  "item.png",
+  "item_s.png",
+] as const;
 
 const { ImageContext, useImageContext, useImageContextValue } =
   createImageContext(imageNames, (imageName) => `/assets/img/top/${imageName}`);

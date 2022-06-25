@@ -41,7 +41,7 @@ const computePositionYRate = (positionY: PositionY) => {
 type PositionX = "left" | "center" | "right" | number;
 type PositionY = "top" | "center" | "bottom" | number;
 
-export type ResponsiveRectProps = {
+export type ResponsiveImageProps = {
   rectWidth: NonNullable<CSSProperties["width"]>;
   rectHeight: NonNullable<CSSProperties["height"]>;
   imageWidth: number;
@@ -55,7 +55,7 @@ export type ResponsiveRectProps = {
   children?: React.ReactNode;
 };
 
-export const ResponsiveRect: React.VFC<ResponsiveRectProps> = ({
+export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
   rectWidth,
   rectHeight,
   imageWidth,
@@ -195,3 +195,20 @@ export const ResponsiveRect: React.VFC<ResponsiveRectProps> = ({
     </Wrapper>
   );
 };
+
+export const Image = styled.div<{ src: string; smallSrc: string }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(${({ src }) => src});
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  @media (min-aspect-ratio: 1/1) and (max-height: 720px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+  @media (max-aspect-ratio: 1/1) and (max-width: 720px) {
+    background-image: url(${({ smallSrc }) => `${smallSrc}`});
+  }
+`;
