@@ -1,13 +1,6 @@
-import React, {
-  CSSProperties,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { CSSProperties, useCallback, useEffect, useState } from "react";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import Head from "next/head";
 import { DefaultLayout as Layout } from "~/components/layouts/index";
 import {
   TopImageContext,
