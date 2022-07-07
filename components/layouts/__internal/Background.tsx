@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 const BackgroundWrapper = styled.div`
   position: relative;
   min-height: calc(100vh - 60px);
+  min-height: calc(100dvh - 60px);
   background-color: var(--chakra-colors-white-full);
   background-image: linear-gradient(
       90deg,
@@ -24,6 +25,7 @@ const BottomGradient = styled.div`
   bottom: 0;
   width: 100%;
   height: 50vh;
+  height: 50dvh;
   overflow: hidden;
   background-image: linear-gradient(
     0deg,

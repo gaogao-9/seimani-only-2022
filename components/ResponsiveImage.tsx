@@ -1,15 +1,29 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{
+  width:
+    | CSSProperties["width"]
+    | [CSSProperties["width"], CSSProperties["width"]];
+  height:
+    | CSSProperties["height"]
+    | [CSSProperties["height"], CSSProperties["height"]];
+}>`
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  width: ${({ width }) => (Array.isArray(width) ? width[0] : width)};
+  width: ${({ width }) => (Array.isArray(width) ? width[1] : width)};
+  height: ${({ height }) => (Array.isArray(height) ? height[0] : height)};
+  height: ${({ height }) => (Array.isArray(height) ? height[1] : height)};
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
   transform-origin: left top;
+  transform-style: inherit;
+  backface-visibility: hidden;
 `;
 
 const computePositionXRate = (positionX: PositionX) => {
@@ -43,8 +57,18 @@ type PositionY = "top" | "center" | "bottom" | number;
 type Size = { w: number; h: number };
 
 export type ResponsiveImageProps = {
-  rectWidth: NonNullable<CSSProperties["width"]>;
-  rectHeight: NonNullable<CSSProperties["height"]>;
+  rectWidth:
+    | NonNullable<CSSProperties["width"]>
+    | [
+        NonNullable<CSSProperties["width"]>,
+        NonNullable<CSSProperties["width"]>,
+      ];
+  rectHeight:
+    | NonNullable<CSSProperties["height"]>
+    | [
+        NonNullable<CSSProperties["height"]>,
+        NonNullable<CSSProperties["height"]>,
+      ];
   imageWidth: number;
   imageHeight: number;
   minimumHeightThretholdRate: number;
@@ -183,13 +207,7 @@ export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
   }, [canvasSize.w, canvasSize.h]);
 
   return (
-    <Wrapper
-      ref={wrapperRef}
-      style={{
-        width: rectWidth,
-        height: rectHeight,
-      }}
-    >
+    <Wrapper ref={wrapperRef} width={rectWidth} height={rectHeight}>
       <ImageContainer
         style={{
           transform: `translate(${translate.x}px, ${translate.y}px) scale(${scale.x}, ${scale.y})`,
@@ -201,6 +219,17 @@ export const ResponsiveImage: React.VFC<ResponsiveImageProps> = ({
   );
 };
 
+export const isSmallSize = (): boolean => {
+  if (typeof window === "undefined") return false;
+  if (!window.matchMedia) return false;
+
+  return (
+    window.matchMedia("(min-aspect-ratio: 1/1) and (max-height: 720px)")
+      .matches ||
+    window.matchMedia("(max-aspect-ratio: 1/1) and (max-width: 720px)").matches
+  );
+};
+
 export const Image = styled.div<{ src: string; smallSrc: string }>`
   position: absolute;
   top: 0;
@@ -209,6 +238,7 @@ export const Image = styled.div<{ src: string; smallSrc: string }>`
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+  backface-visibility: hidden;
 
   @media (min-aspect-ratio: 1/1) and (max-height: 720px) {
     background-image: url(${({ smallSrc }) => `${smallSrc}`});

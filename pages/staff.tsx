@@ -30,6 +30,11 @@ const staffs = [
   },
 ];
 
+const Wrapper = styled(Flex)`
+  min-height: calc(100vh - 60px);
+  min-height: calc(100dvh - 60px);
+`;
+
 const StyledLink = styled.a`
   &[aria-disabled] {
     pointer-events: none;
@@ -39,10 +44,9 @@ const StyledLink = styled.a`
 const Page: React.VFC = () => {
   return (
     <Layout>
-      <Flex
+      <Wrapper
         maxW="1000px"
         height="100%"
-        minH="calc(100vh - 60px)"
         marginX="auto"
         flexDirection="column"
         align="center"
@@ -68,7 +72,7 @@ const Page: React.VFC = () => {
             </Center>
           ))}
         </SimpleGrid>
-      </Flex>
+      </Wrapper>
     </Layout>
   );
 };

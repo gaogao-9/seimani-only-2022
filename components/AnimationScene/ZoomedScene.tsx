@@ -87,7 +87,7 @@ const fadeoutAnimation = keyframes`
 
 const hideCanvasAnimation = keyframes`
   from {
-    transform: scale(1, 1) rotateX(0);
+    transform: scale(1, 1) rotateY(0deg);
   }
   to {
     transform: scale(0, 1) rotateY(720deg);
@@ -97,6 +97,7 @@ const hideCanvasAnimation = keyframes`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  transform-style: preserve-3d;
 `;
 
 const ActorWrapper = styled.div`
@@ -104,17 +105,20 @@ const ActorWrapper = styled.div`
   width: 100%;
   height: 100%;
   animation: 1s ease 6s 1 running forwards ${hideCanvasAnimation};
+  transform-style: preserve-3d;
 `;
 
-const BackgroundAWrapper = styled.div`
+const BackgroundWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: var(--chakra-colors-teal-100);
+  transform-style: inherit;
 `;
 
 const Rect = styled.div`
   position: absolute;
+  backface-visibility: hidden;
 `;
 
 const HorisontalRect = styled(Rect)`
@@ -142,6 +146,7 @@ const Chara = styled.div<{ src: string; smallSrc: string }>`
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  backface-visibility: hidden;
   animation: 0.3s ease-out 0.9s 1 running both ${moveCharaAnimation1},
     1s linear 1.2s 1 running forwards ${moveCharaAnimation2},
     0.3s ease-in 2.2s 1 running forwards ${moveCharaAnimation3},
@@ -185,7 +190,7 @@ export const ZoomedScene: React.VFC<ZoomedSceneProps> = ({
   return (
     <Wrapper>
       <ActorWrapper ref={wrapperRef} onAnimationEnd={animationEnd}>
-        <BackgroundAWrapper>
+        <BackgroundWrapper>
           <HorisontalRect
             style={{ top: "2.5%", transformOrigin: "center right" }}
           />
@@ -246,7 +251,7 @@ export const ZoomedScene: React.VFC<ZoomedSceneProps> = ({
           <VerticalRect
             style={{ left: "92.5%", transformOrigin: "top center" }}
           />
-        </BackgroundAWrapper>
+        </BackgroundWrapper>
         <Chara
           src={animationContext.images["chara.png"]}
           smallSrc={animationContext.images["chara_s.png"]}

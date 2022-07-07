@@ -6,7 +6,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: var(--chakra-colors-black-full);
 
@@ -18,7 +20,9 @@ const Wrapper = styled.div`
 
 const Contents = styled.div`
   width: min(100vw, 100vh);
+  width: min(100dvw, 100dvh);
   height: min(100vw, 100vh);
+  height: min(100dvw, 100dvh);
   overflow: hidden;
   pointer-events: none;
   perspective: 200vmin;

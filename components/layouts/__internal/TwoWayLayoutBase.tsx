@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   grid-template: "contents menu  " 1fr / 1fr auto;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   isolation: isolate;
 `;
 

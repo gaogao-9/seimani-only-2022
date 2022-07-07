@@ -7,12 +7,33 @@ import {
   useTopImageContext,
   useTopImageContextValue,
 } from "~/hooks/useTopImageContext";
-import { ResponsiveImage, Image } from "~/components/ResponsiveImage";
+import {
+  ResponsiveImage,
+  Image,
+  isSmallSize,
+} from "~/components/ResponsiveImage";
 
-const imageSize = {
-  w: 2118,
-  h: 1500,
-} as const;
+const isMobileMac = (): boolean => {
+  if (typeof window === "undefined") return false;
+
+  const ua = window.navigator.userAgent.toLowerCase();
+
+  return (
+    ua.indexOf("ipad") > -1 ||
+    (ua.indexOf("macintosh") > -1 && "ontouchend" in document)
+  );
+};
+
+const imageSize =
+  isMobileMac() || isSmallSize()
+    ? ({
+        w: 529.5,
+        h: 375,
+      } as const)
+    : ({
+        w: 2118,
+        h: 1500,
+      } as const);
 
 const animationStartDelay = 0.5;
 
@@ -99,6 +120,7 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   transform-origin: center center;
+  transform-style: preserve-3d;
 `;
 
 const CharaImageWrapper = styled(ImageWrapper)`
@@ -286,7 +308,7 @@ const PageLayout: React.VFC = () => {
           <>
             <ResponsiveImage
               rectWidth="100%"
-              rectHeight="calc(100vh - 60px)"
+              rectHeight={["calc(100vh - 60px)", "calc(100dvh - 60px)"]}
               landscapePositionX="center"
               landscapePositionY={0.3}
               portraitPositionX="center"
