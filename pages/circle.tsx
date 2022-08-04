@@ -232,6 +232,24 @@ const Page: React.VFC = () => {
             ご都合の合う方は是非ともご助力いただけますと幸いです。
           </Card.Section>
         </Card>
+        <Card title="支援印刷所一覧">
+          <Card.Section title="プリントウォーク">
+            <StyledLink href="https://www.print-walk.co.jp/" target="_blank">
+              <img
+                src="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
+                alt="プリントウォーク"
+              />
+            </StyledLink>
+            <br />
+            支援内容
+            <br />
+            ・イベント特別締切の設定
+            <br />
+            ・イベント割引あり（最大20％OFF）
+            <br />
+            ・搬入料金無料
+          </Card.Section>
+        </Card>
         <Card title="プライバシーポリシー">
           <Card.Section title="">
             戦挙管理委員会（以下「当会」といいます）は、個人情報の保護に関する法令等を遵守するとともに、本プライバシーポリシーを遵守します。
