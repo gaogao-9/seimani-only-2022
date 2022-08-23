@@ -24,12 +24,10 @@ export const routes: Array<Route> = [
     title: "コスプレ参加",
     pathname: "/cosplay",
   },
-  /*
   {
-    title: "サークル一覧",
-    pathname: "/map",
+    title: "イベント情報",
+    pathname: "/event",
   },
-  */
   {
     title: "感染症対策",
     pathname: "/infection",
