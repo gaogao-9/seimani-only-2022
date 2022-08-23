@@ -1,8 +1,15 @@
 import React from "react";
-import { Flex, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import styled from "@emotion/styled";
+import { Button, Flex, Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import { DefaultLayout as Layout } from "~/components/layouts/index";
 import { AnchorLink } from "~/components/AnchorLink";
 import { Card } from "~/components/Card";
+
+const StyledLink = styled.a`
+  &[aria-disabled] {
+    pointer-events: none;
+  }
+`;
 
 const Page: React.VFC = () => {
   return (
@@ -105,9 +112,9 @@ const Page: React.VFC = () => {
             ※スケジュールは変更になることがあります
           </Card.Section>
           <Card.Section title="参加費">
-            即売会参加 600円（入場特典アイテム兼入場証をお渡しする予定です）
+            即売会参加&nbsp;前売&nbsp;600円&nbsp;/&nbsp;当日&nbsp;1000円（受付時に入場特典アイテム兼入場証をお渡しする予定です）
             <br />
-            なお、お支払い方法として、事前のオンラインチケット販売の導入を検討中です。決定次第、追って告知いたします。
+            なお、今回はLivePocketを利用したデジタルチケットを導入します。本ページの最後に販売ページへのリンクがあります。
           </Card.Section>
           <Card.Section title="再入場方法">
             イベント時間中は、会場入口の戦挙管理委員（スタッフ）に入場証をお見せください。
@@ -250,6 +257,19 @@ const Page: React.VFC = () => {
           </Card.Section>
           <Card.Section title="8. お問い合わせ窓口">
             戦挙管理委員会&nbsp;seimani.only[at]gmail.com
+          </Card.Section>
+        </Card>
+        <Card title="一般参加チケット販売">
+          <Card.Section title="">
+            <StyledLink
+              href="https://t.livepocket.jp/e/seimani-only-5"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button as="span" colorScheme="blue">
+                チケット販売ページへ
+              </Button>
+            </StyledLink>
           </Card.Section>
         </Card>
       </Flex>
