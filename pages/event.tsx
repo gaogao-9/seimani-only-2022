@@ -1,15 +1,7 @@
 import React from "react";
-import styled from "@emotion/styled";
-import { Button, Flex, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 import { DefaultLayout as Layout } from "~/components/layouts/index";
-import { AnchorLink } from "~/components/AnchorLink";
 import { Card } from "~/components/Card";
-
-const StyledLink = styled.a`
-  &[aria-disabled] {
-    pointer-events: none;
-  }
-`;
 
 const Page: React.VFC = () => {
   return (
@@ -33,6 +25,9 @@ const Page: React.VFC = () => {
             <img src="/assets/img/event/info.jpg" alt="応募条件" />
           </Card.Section>
           <Card.Section title="">
+            <Text as="span" fontWeight="500">
+              宅配搬入での事前送付をお願いしております。
+            </Text>
             上記画像の通り、今年は会場にいらっしゃる総理にもいらっしゃらない総理にも、宅配搬入での事前送付をお願いしております。
             <br />
             設営を円滑に行うため、ご理解とご協力をお願い致します。
@@ -44,6 +39,22 @@ const Page: React.VFC = () => {
             <br />
             <br />
             【受付期間: 9月22日（木）～9月24日（土）】
+          </Card.Section>
+        </Card>
+        <Card title="アフターイベント">
+          <Card.Section title="教えて！政マニ運営！">
+            政マニの現運営者であり「詫びおじ」としても知られる三輪光さんが、総理の皆さんから募集した疑問・質問にお答えくださいます！
+            <br />
+            ※ご本人のご登壇はありません。
+          </Card.Section>
+          <Card.Section title="政マニアック！クイズ大会！">
+            政マニアック！クイズ大会！
+            <br />
+            第一回開催にて大好評だった企画が帰ってきます！
+            <br />
+            優勝者には特別な景品をプレゼント！
+            <br />
+            参加予定の総理の皆さんはしっかり復習しておきましょう！
           </Card.Section>
         </Card>
       </Flex>
