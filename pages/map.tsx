@@ -81,6 +81,11 @@ const Page: React.VFC = () => {
             </WrapItem>
           </Wrap>
         </Card>
+        <Card title="会場地図">
+          <Card.Section title="">
+            <img src="/assets/img/map/map.png" alt="会場地図" />
+          </Card.Section>
+        </Card>
       </Flex>
     </Layout>
   );

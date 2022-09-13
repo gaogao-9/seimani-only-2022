@@ -224,6 +224,14 @@ const Page: React.VFC = () => {
             会場内で頒布行為をしたい方は是非ともサークル参加を！
           </Card.Section>
         </Card>
+        <Card title="参加サークル一覧">
+          <Card.Section title="">
+            <img
+              src="/assets/img/circle/circlelist.jpg"
+              alt="参加サークル一覧"
+            />
+          </Card.Section>
+        </Card>
         <Card title="プライバシーポリシー">
           <Card.Section title="">
             戦挙管理委員会（以下「当会」といいます）は、個人情報の保護に関する法令等を遵守するとともに、本プライバシーポリシーを遵守します。
