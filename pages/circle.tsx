@@ -138,7 +138,9 @@ const Page: React.VFC = () => {
             <br />
             コスプレ諸注意は コスプレ参加者向けのページ に掲載しております。
             <br />
-            <AnchorLink to="/cosplay">https://festia.moe/cosplay</AnchorLink>
+            <AnchorLink to="/cosplay">
+              https://only2022.festia.moe/cosplay
+            </AnchorLink>
             <br />
             コスプレ参加予定の方はご一読ください。
           </Card.Section>

@@ -37,7 +37,7 @@ const Page: React.VFC = () => {
             詳細：感染症対策ページ
             <br />
             <AnchorLink to="/infection">
-              https://festia.moe/infection
+              https://only2022.festia.moe/infection
             </AnchorLink>
             <br />
             <br />
@@ -203,7 +203,9 @@ const Page: React.VFC = () => {
             <br />
             ・コスプレ諸注意は&nbsp;コスプレ参加者向けのページ&nbsp;に掲載しております。コスプレ参加予定の方はご一読ください。
             <br />
-            <AnchorLink to="/cosplay">https://festia.moe/cosplay</AnchorLink>
+            <AnchorLink to="/cosplay">
+              https://only2022.festia.moe/cosplay
+            </AnchorLink>
           </Card.Section>
           <Card.Section title="設営・撤収作業への協力のお願い">
             会場内に机や椅子などを並べる作業や、片付ける作業をお手伝いいただける方を募集しています。
